@@ -6,6 +6,9 @@ import { getdb, getfb, getUserId } from "./App.tsx";
 import { get, ref, onValue } from "firebase/database";
 import { doc, getDoc } from "firebase/firestore";
 
+import chatIconUrl from "/src/assets/chat-icon.svg";
+import defaultProfileUrl from "/src/assets/default-profile.png";
+
 // Extend Leaflet's Marker to include our custom data
 declare module "leaflet" {
   interface Marker {
@@ -72,7 +75,7 @@ const MapComponent = () => {
     map.current!.on("locationfound", onLocationFound);
 
     var chatIcon = L.icon({
-      iconUrl: "/src/assets/chat-icon.svg",
+      iconUrl: chatIconUrl,
 
       iconSize: [38, 95],
       shadowSize: [50, 64],
@@ -124,14 +127,12 @@ const MapComponent = () => {
 
                     const messagePromises = textObjects.map((textObj) => {
                       const pfp = imageCache.get(textObj.userId) || "";
-                      const pfpSrc = pfp
-                        ? `src="${pfp}"`
-                        : 'src="/src/assets/default-profile.png"';
+                      const pfpSrc = pfp ? pfp : defaultProfileUrl;
 
                       if (textObj.userId === getUserId()) {
-                        return `<div class='text-list-sent'> <img class="text-user-icon" ${pfpSrc}/> <p>${textObj.text}</p> </div>`;
+                        return `<div class='text-list-sent'> <img class="text-user-icon" src="${pfpSrc}"/> <p>${textObj.text}</p> </div>`;
                       } else {
-                        return `<div class="text-list-received"><img class="text-user-icon" ${pfpSrc}/><p>${textObj.text}</p> </div>`;
+                        return `<div class="text-list-received"><img class="text-user-icon" src="${pfpSrc}"/><p>${textObj.text}</p> </div>`;
                       }
                     });
 

@@ -14,6 +14,8 @@ import MapComponent from "./Map.tsx";
 import "./App.css";
 import Loader from "./components/Loader.tsx";
 import Profile from "./components/Profile.tsx";
+import crossIcon from "./assets/cross-icon.svg";
+import sendIcon from "./assets/send-icon.svg";
 
 let USER: any = null;
 let fireStore: any = null;
@@ -308,7 +310,7 @@ function App() {
           <h1 id="chat-title">This is a title</h1>
           <img
             className="cross-icon"
-            src="/src/assets/cross-icon.svg"
+            src={crossIcon}
             onClick={onChatCloseBtnClick}
           ></img>
         </div>
@@ -321,7 +323,7 @@ function App() {
           ></textarea>
           <img
             className="send-icon"
-            src="/src/assets/send-icon.svg"
+            src={sendIcon}
             onClick={sendBtnClick}
           ></img>
         </div>
