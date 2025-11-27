@@ -1,0 +1,459 @@
+/* .user-profile-button {
+  position: absolute;
+  z-index: 999;
+  margin: 10px;
+  scale: 1.2;
+  padding: 4px;
+  background-color: rgba(255, 255, 255, 0.75);
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0.1px solid black;
+} */
+
+body {
+  overflow: hidden;
+}
+
+.authentication-page {
+  /* display: none; */
+  position: absolute;
+  z-index: 9999;
+  height: 100dvh;
+  width: 100dvw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* From Uiverse.io by D3OXY */
+/* DEOXY Was Here */
+.form {
+  --background: #d3d3d3;
+  --input-focus: #2d8cf0;
+  --font-color: #323232;
+  --font-color-sub: #666;
+  --bg-color: #fff;
+  --main-color: #323232;
+  scale: 1.4;
+  padding: 20px;
+  background: var(--background);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  width: max-content;
+  border-radius: 5px;
+  border: 2px solid var(--main-color);
+  box-shadow: 4px 4px var(--main-color);
+}
+
+.form > p {
+  font-family: var(--font-DelaGothicOne);
+  color: var(--font-color);
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form > p > span {
+  font-family: var(--font-SpaceMono);
+  color: var(--font-color-sub);
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.separator {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.separator > div {
+  width: 100px;
+  height: 3px;
+  border-radius: 5px;
+  background-color: var(--font-color-sub);
+}
+
+.separator > span {
+  color: var(--font-color);
+  font-family: var(--font-SpaceMono);
+  font-weight: 600;
+}
+
+.oauthButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  /* margin: 50px auto 0 auto; */
+  padding: auto 15px 15px auto;
+  width: 250px;
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid var(--main-color);
+  background-color: var(--bg-color);
+  box-shadow: 4px 4px var(--main-color);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--font-color);
+  cursor: pointer;
+  transition: all 250ms;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.oauthButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background-color: #212121;
+  z-index: -1;
+  -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  transition: all 250ms;
+}
+
+.oauthButton:hover {
+  color: #e8e8e8;
+}
+
+.oauthButton:hover::before {
+  width: 100%;
+}
+
+.form > input {
+  width: 250px;
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid var(--main-color);
+  background-color: var(--bg-color);
+  box-shadow: 4px 4px var(--main-color);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--font-color);
+  padding: 5px 10px;
+  outline: none;
+}
+
+.signin-link {
+  font-size: 0.7rem;
+  white-space: nowrap;
+  align-self: center; /* Center this specific element within the form */
+  margin-top: -10px; /* Reduce the gap from the button above */
+  color: var(--font-color-sub);
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.user-profile-button {
+  position: absolute;
+  z-index: 999;
+  margin: 10px;
+  scale: 1.2;
+  padding: 4px;
+  background-color: #540863;
+  filter: brightness(1.8);
+  aspect-ratio: 1 / 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+
+  border: 2px solid black;
+  box-shadow: 2px 2px 0px black;
+
+  &:hover {
+    margin: 12px;
+
+    box-shadow: none;
+  }
+}
+
+.user-chat-interface {
+  position: absolute;
+  right: 0px;
+  margin: 1dvh 20px;
+  border: 4px solid #540863;
+  background-color: #f6f6f6;
+  width: 520px;
+  height: 98dvh;
+  z-index: 999;
+
+  animation: chatPopOut 0.01s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+#chat-title {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 2.2rem;
+  margin: 0;
+}
+
+#chat-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  box-shadow: -4px 4px 0px black;
+  border-right: 4px solid #540863;
+
+  background: linear-gradient(135deg, #540863, #7a0e8a);
+  color: white;
+  padding: 8px;
+
+  width: 540px;
+  top: 8px;
+  left: -24px;
+  position: relative;
+  z-index: 99999;
+
+  overflow: hidden;
+}
+
+.cross-icon {
+  height: 30px;
+  position: relative;
+  left: -8px;
+  transform: scale(2);
+  aspect-ratio: 1 / 1;
+  border-left: 2px solid #34053d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-bottom: 3px solid #7a0e8a;
+  }
+}
+
+#chat-text-box {
+  min-height: 100%;
+  max-height: 100%;
+  height: 100%;
+  width: 480px;
+  border: none;
+  outline: none;
+  font-size: 1.6rem;
+  border-bottom: 4px solid #92487a;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+#chat-text-box-container {
+  width: 520px;
+  height: 48px;
+
+  position: relative;
+  left: -4px;
+
+  display: flex;
+  justify-content: space-between;
+  justify-content: center;
+
+  background-color: white;
+  border: 4px solid black;
+
+  overflow: hidden;
+}
+
+.send-icon {
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  border-left: 2px solid #34053d;
+  border-bottom: 4px solid #92487a;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-bottom: none;
+  }
+}
+
+#text-list-container {
+  height: 80dvh;
+  width: 100%;
+
+  overflow-y: scroll;
+
+  padding: 18px 0px;
+
+  display: flex;
+  flex-direction: column;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.text-user-icon {
+  height: 40px;
+  background-repeat: no-repeat;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background-size: cover;
+  border: 3px solid #e49ba6;
+  background-color: white;
+  z-index: 9999;
+  margin-top: -3.5px;
+}
+
+.text-list-received,
+.text-list-sent {
+  margin: 16px 8px;
+
+  display: flex;
+}
+
+.text-list-received p,
+.text-list-sent p {
+  margin: 0;
+
+  background-color: #e49ba6;
+  width: max-content;
+  max-width: 480px;
+  padding: 6px;
+
+  height: max-content;
+}
+
+.text-list-received p {
+  margin-left: -14px;
+  margin-right: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-right-radius: 8px;
+  box-shadow: 6px 6px 0px #92487b74;
+  padding-left: 16px;
+}
+
+.text-list-sent {
+  flex-direction: row-reverse;
+}
+
+.text-list-sent p {
+  margin-right: -14px;
+  margin-left: 8px;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+  box-shadow: -6px 6px 0px #92487b74;
+  padding-right: 16px;
+}
+
+.chat-interface-show {
+  animation: chatPopIn 0.45s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+.chat-interface-hide {
+  animation: chatPopOut 0.35s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes chatPopOut {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  40% {
+    transform: translateX(-10px) scale(1.03);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateX(40px) scale(0.8);
+    opacity: 0;
+    display: none;
+  }
+}
+
+@keyframes chatPopIn {
+  0% {
+    transform: translateX(40px) scale(0.8);
+    opacity: 0;
+  }
+  60% {
+    transform: translateX(-10px) scale(1.03);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+    display: block;
+  }
+}
+
+.user-profile-card {
+  position: absolute;
+  top: 60px;
+  left: 10px;
+  z-index: 998;
+  width: 300px;
+  background-color: #f6f6f6;
+  border: 4px solid #540863;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 4px 4px 0px black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transform-origin: top left;
+}
+
+.profile-card-show {
+  animation: profileCardPopIn 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+.profile-card-hide {
+  animation: profileCardPopOut 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes profileCardPopIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    display: flex;
+  }
+}
+
+@keyframes profileCardPopOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0;
+    display: none;
+  }
+}
+
+.user-profile-card .profile-pic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #540863;
+  background-size: cover;
+  background-position: center;
+}

@@ -1,0 +1,279 @@
+/* From Uiverse.io by janisar-hyder, adapted for the Profile component */
+.profile-container {
+  position: fixed;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.profile-modal-card {
+  background: #fff;
+  border: 4px solid #000;
+  padding: 1.5rem;
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* From Uiverse.io by 0xnihilism */
+.brutalist-card {
+  font-family: "Arial", sans-serif;
+  /* The container .card now handles background, border, etc. */
+  padding: 0 1.5rem 1.5rem; /* Add padding for content */
+  width: 420px;
+}
+
+.brutalist-card__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative; /* For positioning the close button */
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #000;
+  padding-bottom: 1rem;
+}
+
+.brutalist-card__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  padding: 0.5rem;
+}
+
+.brutalist-card__icon svg {
+  height: 1.5rem;
+  width: 1.5rem;
+  fill: #fff;
+}
+
+.brutalist-card__alert {
+  font-weight: 900;
+  color: #000;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+
+.brutalist-card__close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #000;
+  padding: 0 0.5rem;
+  line-height: 1;
+}
+
+.brutalist-card__message {
+  margin-top: 1rem;
+  color: #000;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  border-bottom: 2px solid #000;
+  padding-bottom: 1rem;
+  font-weight: 600;
+}
+
+.brutalist-card__actions {
+  margin-top: 1rem;
+}
+
+.brutalist-card__button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 3px solid #000;
+  background-color: #fff;
+  color: #000;
+  position: relative;
+  transition: all 0.2s ease;
+  box-shadow: 5px 5px 0 #000;
+  overflow: hidden;
+  text-decoration: none;
+  margin-bottom: 1rem;
+}
+
+.brutalist-card__button--read {
+  background-color: #000;
+  color: #fff;
+}
+
+.brutalist-card__button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: all 0.6s;
+}
+
+.brutalist-card__button:hover::before {
+  left: 100%;
+}
+
+.brutalist-card__button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 #000;
+}
+
+.brutalist-card__button--mark:hover {
+  background-color: #296fbb;
+  border-color: #296fbb;
+  color: #fff;
+  box-shadow: 7px 7px 0 #004280;
+}
+
+.brutalist-card__button--read:hover {
+  background-color: #ff0000;
+  border-color: #ff0000;
+  color: #fff;
+  box-shadow: 7px 7px 0 #800000;
+}
+
+.brutalist-card__button:active {
+  transform: translate(5px, 5px);
+  box-shadow: none;
+}
+
+#profile-img {
+  background-size: contain;
+}
+
+.stack {
+  width: 250px; /* Use a fixed width instead of a percentage */
+  max-width: 250px; /* Match the width to prevent unexpected growth */
+  transition: 0.25s ease;
+  &:hover {
+    transform: rotate(5deg);
+  }
+
+  z-index: 999;
+}
+
+.card {
+  aspect-ratio: 3 / 2;
+  border: 4px solid;
+  background-color: #fff;
+  position: relative;
+  transition: 0.15s ease;
+  cursor: pointer;
+  padding: 5% 5% 15% 5%;
+  &:before,
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border: 4px solid;
+    background-color: #fff;
+    transform-origin: center center;
+    z-index: -1;
+    transition: 0.15s ease;
+    top: 0;
+    left: 0;
+  }
+
+  &:before {
+    transform: rotate(-6deg);
+  }
+
+  &:after {
+    transform: rotate(6deg);
+  }
+
+  &:hover:before {
+    transform: rotate(-4deg);
+  }
+  &:hover:after {
+    transform: rotate(4deg);
+  }
+}
+.image {
+  width: 100%;
+  border: 4px solid;
+  background: url("/src/assets/default-profile.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  z-index: 999;
+}
+
+.profile-content-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+  z-index: 1;
+}
+
+.profile-info {
+  text-align: center;
+  margin-top: 1rem;
+  color: #333;
+}
+
+.profile-info h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.profile-info p {
+  margin: 0.25rem 0 1rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.profile-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+.profile-btn {
+  background-color: #f0f0f0;
+  border: 2px solid #000;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.profile-btn:hover {
+  background-color: #e0e0e0;
+  box-shadow: 3px 3px 0 #000;
+  transform: translate(-2px, -2px);
+}
