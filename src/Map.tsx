@@ -1,10 +1,17 @@
-import React, { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import "leaflet/dist/leaflet.css";
 import "./Map.css";
 import L from "leaflet";
 import { getdb, getfb, getUserId } from "./App.tsx";
-import { get, ref, set, onValue } from "firebase/database";
+import { get, ref, onValue } from "firebase/database";
 import { doc, getDoc } from "firebase/firestore";
+
+// Extend Leaflet's Marker to include our custom data
+declare module "leaflet" {
+  interface Marker {
+    chatData?: { id: string; chatName: string; location: [number, number] };
+  }
+}
 
 const decodeImage = (data: any): string | null => {
   return data?.imageUrl || null;
@@ -12,7 +19,7 @@ const decodeImage = (data: any): string | null => {
 
 const MapComponent = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<HTMLDivElement>(null);
+  const map = useRef<L.Map | null>(null);
   const center = { lng: 13.338414, lat: 52.507932 };
   const [zoom] = useState(3);
 
@@ -34,10 +41,10 @@ const MapComponent = () => {
   };
 
   useEffect(() => {
-    if (map.current) return;
+    if (map.current || !mapContainer.current) return;
     let bounds = L.latLngBounds([85, 190], [-85, -170]);
 
-    map.current = new L.Map(mapContainer.current, {
+    map.current = new L.Map(mapContainer.current!, {
       center: L.latLng(center.lat, center.lng),
       attributionControl: false,
       zoom: zoom,
@@ -54,15 +61,15 @@ const MapComponent = () => {
         attribution:
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
       }
-    ).addTo(map.current);
+    ).addTo(map.current!);
 
-    map.current.locate({ setView: true });
+    map.current!.locate({ setView: true });
 
     function onLocationFound(e: any) {
-      map.current.setView(e.latlng, 16);
+      map.current!.setView(e.latlng, 16);
     }
 
-    map.current.on("locationfound", onLocationFound);
+    map.current!.on("locationfound", onLocationFound);
 
     var chatIcon = L.icon({
       iconUrl: "/src/assets/chat-icon.svg",
@@ -81,7 +88,7 @@ const MapComponent = () => {
           Object.entries(groups).map(([groupId, group]: [string, any]) => {
             let marker = L.marker([group.lat, group.lng], {
               icon: chatIcon,
-            }).addTo(map.current);
+            }).addTo(map.current!);
 
             marker.chatData = {
               id: groupId,
@@ -98,10 +105,10 @@ const MapComponent = () => {
                 "#text-list-container"
               );
 
-              localStorage.setItem("currentChat", e.target.chatData.id);
+              localStorage.setItem("currentChat", e.target.chatData!.id);
 
               onValue(
-                ref(getdb(), `groups/${e.target.chatData.id}`),
+                ref(getdb(), `groups/${e.target.chatData!.id}`),
                 async (snapshot) => {
                   if (snapshot.exists() && listContainer) {
                     const texts = snapshot.val().texts || [];
@@ -143,7 +150,9 @@ const MapComponent = () => {
 
               listContainer &&
                 (listContainer.scrollTop = listContainer.scrollHeight);
-              chatTitle && (chatTitle.textContent = e.target.chatData.chatName);
+              if (chatTitle && e.target.chatData) {
+                chatTitle.textContent = e.target.chatData.chatName;
+              }
             });
           });
         } else {

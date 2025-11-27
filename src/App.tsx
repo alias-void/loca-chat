@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { useState, useRef, useEffect } from "react";
 import {
   getAuth,
@@ -9,7 +8,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { getDatabase, get, set, ref } from "firebase/database";
-import { collection, addDoc, getFirestore } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 
 import MapComponent from "./Map.tsx";
 import "./App.css";
@@ -55,7 +54,7 @@ function App() {
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
+  // const analytics = getAnalytics(app); // This was unused
   database = getDatabase(app);
   fireStore = getFirestore(app);
   const [showLoader, setShowLoader] = useState(false); // State to control Loader visibility
@@ -110,8 +109,8 @@ function App() {
         setShowLoader(false);
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        // const errorCode = error.code;
+        const errorMessage = error.message; // You might want to display this to the user
 
         console.log(errorMessage);
         setShowLoader(false);
@@ -133,8 +132,8 @@ function App() {
         setShowLoader(false);
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        // const errorCode = error.code;
+        const errorMessage = error.message; // You might want to display this to the user
         console.error("Sign in failed:", errorMessage);
         // You might want to show this error to the user
         setShowLoader(false);

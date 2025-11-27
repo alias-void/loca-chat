@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 import "./Profile.css";
-import { getdb, getfb, getUserId } from "../App";
+import { getfb, getUserId } from "../App";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 
 interface ProfileProps {
