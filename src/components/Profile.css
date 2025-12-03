@@ -218,6 +218,30 @@
   aspect-ratio: 1 / 1;
   position: relative;
   z-index: 999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    .edit-image-icon-container {
+      display: flex;
+    }
+  }
+}
+
+.edit-image-icon-container {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-image-icon {
+  scale: 2;
+  color: white;
 }
 
 .profile-content-row {

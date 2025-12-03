@@ -168,10 +168,12 @@ body {
   z-index: 999;
   margin: 10px;
   scale: 1.2;
+  position: absolute;
   padding: 4px;
   background-color: #540863;
   filter: brightness(1.8);
   aspect-ratio: 1 / 1;
+  transition: all 0.2s ease;
 
   display: flex;
   align-items: center;
@@ -179,12 +181,40 @@ body {
   color: white;
 
   border: 2px solid black;
-  box-shadow: 2px 2px 0px black;
+  box-shadow: 2px 2px 0 #000;
+  overflow: hidden;
 
   &:hover {
-    margin: 12px;
+    transform: translate(-2px, -2px);
+    background-color: #7a0e8a;
+    border-color: #7a0e8a;
+    color: #fff;
+    box-shadow: 4px 4px 0 #34053d;
+  }
 
+  &:active {
+    transform: translate(2px, 2px);
     box-shadow: none;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    transition: left 0.6s ease;
+  }
+
+  &:hover::before {
+    left: 100%;
   }
 }
 
